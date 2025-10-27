@@ -6,7 +6,7 @@ def add_two_numbers(x, y):
 
 @pytest.mark.math
 def test_small_numbers():
-    assert add_two_numbers(1, 2) == 30, "The sum of 1 and 2 should be 3"
+    assert add_two_numbers(1, 2) == 3, "The sum of 1 and 2 should be 3"
 
 @pytest.mark.math
 def test_large_numbers():
