@@ -1,25 +1,20 @@
 pipeline {
-  agent any
+  agent { label 'windows' }
   stages {
-    stage('Checkout') {
+    stage('Checkout'){ steps { checkout scm } }
+    stage('Install'){
       steps {
-        checkout scm
+        bat 'py -m pip install --upgrade pip'
+        bat 'py -m pip install -r requirements.txt'
       }
     }
-    stage('Install dependencies') {
+    stage('Tests'){
       steps {
-        sh 'pip install -r requirements.txt'
+        bat 'py -m pytest --maxfail=1 -q --junitxml=results.xml'
       }
     }
-    stage('Run tests') {
-      steps {
-        sh 'pytest --maxfail=1 --disable-warnings -q --junitxml=results.xml'
-      }
-    }
-    stage('Publish Results') {
-      steps {
-        junit 'results.xml'
-      }
+    stage('Publish'){
+      steps { junit 'results.xml' }
     }
   }
 }
