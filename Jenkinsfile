@@ -19,7 +19,7 @@ pipeline {
       steps {
         bat '''
             call C:\\Users\\AhmedAbdEl-Megeed\\python-selenium-venv\\Scripts\\activate
-            py -m pytest -q --junitxml=reports/junit/pytest.xml --maxfail=1 -k "not slow"'
+            python -m pytest -q --junitxml=reports/junit/pytest.xml --maxfail=1 -k "not slow"
         '''
       }
       post { always { junit allowEmptyResults: true, testResults: 'reports/junit/*.xml' } }
