@@ -3,10 +3,15 @@ import time
 from os.path import exists
 
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
 # Open browser
-driver = webdriver.Chrome()
+opts = Options();
+opts.add_argument("--headless=new");
+opts.add_argument("--no-sandbox");
+opts.add_argument("--disable-gpu")
+driver = webdriver.Chrome(options=opts)
 #time.sleep(2)
 
 # Go to webpage
